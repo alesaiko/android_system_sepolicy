@@ -94,7 +94,7 @@ neverallow netd system_file:dir_file_class_set write;
 # Write to files in /data/data or system files on /data
 neverallow netd { app_data_file system_data_file }:dir_file_class_set write;
 
-# only system_server and dumpstate may interact with netd over binder
-neverallow { domain -system_server -dumpstate } netd_service:service_manager find;
-neverallow { domain -system_server -dumpstate } netd:binder call;
+# only system_server, system_app and dumpstate may interact with netd over binder
+neverallow { domain -system_server -system_app -dumpstate } netd_service:service_manager find;
+neverallow { domain -system_server -system_app -dumpstate } netd:binder call;
 neverallow netd { domain -system_server -servicemanager userdebug_or_eng(`-su') }:binder call;
